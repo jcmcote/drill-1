@@ -54,6 +54,7 @@ public class IntegerValueWriter extends AbstractScalarValueWriter {
     case VARCHAR: {
       byte[] bytes = Long.toString(unpackLong).getBytes();
       integerBuffer.position(0);
+      integerBuffer.limit(bytes.length);
       integerBuffer.put(bytes);
       integerBuffer.position(0);
       integerBuffer.limit(bytes.length);
@@ -61,11 +62,11 @@ public class IntegerValueWriter extends AbstractScalarValueWriter {
     }
       break;
     case VARBINARY: {
-      byte[] bytes = Long.toString(unpackLong).getBytes();
       integerBuffer.position(0);
-      integerBuffer.put(bytes);
+      integerBuffer.limit(Long.BYTES);
+      integerBuffer.putLong(unpackLong);
       integerBuffer.position(0);
-      integerBuffer.limit(bytes.length);
+      integerBuffer.limit(Long.BYTES);
       writeAsVarBinary(integerBuffer, mapWriter, fieldName, listWriter);
     }
       break;

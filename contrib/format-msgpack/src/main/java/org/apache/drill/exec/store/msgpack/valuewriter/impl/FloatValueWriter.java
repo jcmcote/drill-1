@@ -53,6 +53,7 @@ public class FloatValueWriter extends AbstractScalarValueWriter {
     case VARCHAR: {
       byte[] bytes = Double.toString(unpackDouble).getBytes();
       floatBuffer.position(0);
+      floatBuffer.limit(bytes.length);
       floatBuffer.put(bytes);
       floatBuffer.position(0);
       floatBuffer.limit(bytes.length);
@@ -60,11 +61,11 @@ public class FloatValueWriter extends AbstractScalarValueWriter {
     }
       break;
     case VARBINARY: {
-      byte[] bytes = Double.toString(unpackDouble).getBytes();
       floatBuffer.position(0);
-      floatBuffer.put(bytes);
+      floatBuffer.limit(Double.BYTES);
+      floatBuffer.putDouble(unpackDouble);
       floatBuffer.position(0);
-      floatBuffer.limit(bytes.length);
+      floatBuffer.limit(Double.BYTES);
       writeAsVarBinary(floatBuffer, mapWriter, fieldName, listWriter);
     }
       break;

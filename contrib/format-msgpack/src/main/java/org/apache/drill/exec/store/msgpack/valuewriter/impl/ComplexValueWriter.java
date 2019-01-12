@@ -124,7 +124,7 @@ public abstract class ComplexValueWriter extends AbstractValueWriter {
       if (mapWriter != null) {
         message = MessageFormatter
             .arrayFormat("failed to write type: '{}' value: '{}' into map at '{}' target schema: '{}'\n",
-                new Object[] { valueType, unpacker, context.getFieldPathTracker(), fieldName, schema })
+                new Object[] { valueType, unpacker, context.getFieldPathTracker(), schema })
             .getMessage();
       } else {
         message = MessageFormatter
